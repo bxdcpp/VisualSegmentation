@@ -21,6 +21,7 @@
 // SlicerQt includes
 #include "qSlicerVisualSegmentationModuleWidget.h"
 #include "ui_qSlicerVisualSegmentationModuleWidget.h"
+#include "qVisualSegmentEditorWidget.h"
 
 
 
@@ -31,7 +32,8 @@
 #include <qSlicerLayoutManager.h>
 #include <vtkMRMLSegmentEditorNode.h>
 #include <qSlicerSegmentEditorEffectFactory.h>
-#include <qMRMLSegmentEditorWidget.h>
+//#include <qMRMLSegmentEditorWidget.h>
+#include <vtkMRMLSegmentationNode.h>
 
 //-----------------------------------------------------------------------------
 /// \ingroup Slicer_QtModules_ExtensionTemplate
@@ -40,7 +42,7 @@ class qSlicerVisualSegmentationModuleWidgetPrivate: public Ui_qSlicerVisualSegme
 public:
   qSlicerVisualSegmentationModuleWidgetPrivate();
   vtkMRMLSegmentEditorNode* m_ParameterSetNode;
-  qMRMLSegmentEditorWidget* SegmentEditorWidget;
+  qVisualSegmentEditorWidget* SegmentEditorWidget;
 };
 
 //-----------------------------------------------------------------------------
@@ -73,8 +75,9 @@ void qSlicerVisualSegmentationModuleWidget::setup()
   Q_D(qSlicerVisualSegmentationModuleWidget);
   d->setupUi(this);
   this->Superclass::setup();
-  d->SegmentEditorWidget = new qMRMLSegmentEditorWidget();
+  d->SegmentEditorWidget = new qVisualSegmentEditorWidget();
    selectParameterNode();
+   setDefaultSegmentation();
   this->layout()->addWidget(d->SegmentEditorWidget);
   vtkMRMLScene* newScene = qSlicerApplication::application()->mrmlScene();
   QObject::connect(qSlicerSegmentEditorEffectFactory::instance(), SIGNAL(effectRegistered(QString)), this, SLOT(editorEffectRegistered()));
@@ -122,7 +125,6 @@ void qSlicerVisualSegmentationModuleWidget::selectParameterNode()
 			vtkSmartPointer<vtkMRMLSegmentEditorNode> segEditorNode = vtkSmartPointer<vtkMRMLSegmentEditorNode>::New();
 			segEditorNode->SetSingletonTag(segmentEditorSingletonTag.c_str());
 			vtkMRMLNode* segNode = scene->AddNode(segEditorNode);
-			segEditorNode->
 			segmentEditorNode = vtkMRMLSegmentEditorNode::SafeDownCast(segNode);
 			if (segmentEditorNode)
 			{
@@ -274,4 +276,15 @@ void qSlicerVisualSegmentationModuleWidget::cleanup()
 	Q_D(qSlicerVisualSegmentationModuleWidget);
 	d->SegmentEditorWidget->removeViewObservations();
 	QObject::disconnect(qSlicerSegmentEditorEffectFactory::instance(), SIGNAL(effectRegistered(QString)), this, SLOT(editorEffectRegistered()));
+}
+
+void qSlicerVisualSegmentationModuleWidget::setDefaultSegmentation()
+{
+	Q_D(qSlicerVisualSegmentationModuleWidget);
+	vtkMRMLNode* node = d->SegmentEditorWidget->segmentationNode();
+	vtkMRMLSegmentationNode* segmentationNode = vtkMRMLSegmentationNode::SafeDownCast(node);
+	if (segmentationNode == nullptr)
+	{
+		vtkMRMLNode *segNode = 	qSlicerApplication::application()->mrmlScene()->AddNewNodeByClass("vtkMRMLSegmentationNode");
+	}
 }

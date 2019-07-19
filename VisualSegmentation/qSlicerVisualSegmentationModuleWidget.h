@@ -56,6 +56,8 @@ public slots:
 
 	void cleanup();
 
+	void setDefaultSegmentation();
+
 protected:
   QScopedPointer<qSlicerVisualSegmentationModuleWidgetPrivate> d_ptr;
 
