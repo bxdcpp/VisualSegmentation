@@ -374,8 +374,8 @@ void qVisualSegmentEditorWidgetPrivate::init()
   Q_Q(qVisualSegmentEditorWidget);
   this->setupUi(q);
 
-  this->SliceRotateWarningButton->setMaximumHeight(this->SegmentationNodeComboBox->sizeHint().height());
-  this->SliceRotateWarningButton->setMaximumWidth(this->SegmentationNodeComboBox->sizeHint().height());
+  //this->SliceRotateWarningButton->setMaximumHeight(this->SegmentationNodeComboBox->sizeHint().height());
+  //this->SliceRotateWarningButton->setMaximumWidth(this->SegmentationNodeComboBox->sizeHint().height());
   this->SpecifyGeometryButton->setMaximumHeight(this->MasterVolumeNodeComboBox->sizeHint().height());
   this->SpecifyGeometryButton->setMaximumWidth(this->MasterVolumeNodeComboBox->sizeHint().height());
 
@@ -434,10 +434,10 @@ void qVisualSegmentEditorWidgetPrivate::init()
   this->Show3DButton->setMenu(show3DButtonMenu);
 
   // Make connections
-  QObject::connect( this->SegmentationNodeComboBox, SIGNAL(currentNodeChanged(vtkMRMLNode*)),
-    q, SLOT(onSegmentationNodeChanged(vtkMRMLNode*)) );
-  QObject::connect(this->SliceRotateWarningButton, SIGNAL(clicked()),
-    q, SLOT(rotateSliceViewsToSegmentation()));
+  /*QObject::connect( this->SegmentationNodeComboBox, SIGNAL(currentNodeChanged(vtkMRMLNode*)),
+    q, SLOT(onSegmentationNodeChanged(vtkMRMLNode*)) );*/
+  //QObject::connect(this->SliceRotateWarningButton, SIGNAL(clicked()),
+  //  q, SLOT(rotateSliceViewsToSegmentation()));
   QObject::connect( this->MasterVolumeNodeComboBox, SIGNAL(currentNodeChanged(vtkMRMLNode*)),
     q, SLOT(onMasterVolumeNodeChanged(vtkMRMLNode*)) );
   QObject::connect( this->SpecifyGeometryButton, SIGNAL(clicked()),
@@ -505,6 +505,9 @@ void qVisualSegmentEditorWidgetPrivate::init()
   this->MaskingGroupBox->hide();
 
   q->updateSliceRotateWarningButtonVisibility();
+
+  this->SegmentationNodeComboBox->setVisible(false);
+ // this->SegmentationNodeLabel->setVisible(false);
 }
 
 //-----------------------------------------------------------------------------

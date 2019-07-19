@@ -286,5 +286,6 @@ void qSlicerVisualSegmentationModuleWidget::setDefaultSegmentation()
 	if (segmentationNode == nullptr)
 	{
 		vtkMRMLNode *segNode = 	qSlicerApplication::application()->mrmlScene()->AddNewNodeByClass("vtkMRMLSegmentationNode");
+		d->m_ParameterSetNode->SetAndObserveSegmentationNode(vtkMRMLSegmentationNode::SafeDownCast(segNode));
 	}
 }
