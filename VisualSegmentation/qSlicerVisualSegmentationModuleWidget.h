@@ -32,6 +32,7 @@ class Q_SLICER_QTMODULES_VISUALSEGMENTATION_EXPORT qSlicerVisualSegmentationModu
   public qSlicerAbstractModuleWidget
 {
   Q_OBJECT
+ // QVTK_OBJECT
 
 public:
 

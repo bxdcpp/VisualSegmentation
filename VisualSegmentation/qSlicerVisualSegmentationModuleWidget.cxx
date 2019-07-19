@@ -126,18 +126,11 @@ void qSlicerVisualSegmentationModuleWidget::selectParameterNode()
 			segEditorNode->SetSingletonTag(segmentEditorSingletonTag.c_str());
 			vtkMRMLNode* segNode = scene->AddNode(segEditorNode);
 			segmentEditorNode = vtkMRMLSegmentEditorNode::SafeDownCast(segNode);
-			if (segmentEditorNode)
-			{
-				std::cout << "set 11111111" << endl;
-				d->SegmentEditorWidget->setMRMLSegmentEditorNode(segmentEditorNode);
-				d->SegmentEditorWidget->updateWidgetFromMRML();
-			}
-
 		}
 		if (segmentEditorNode == d->m_ParameterSetNode)
 			return;
 		d->m_ParameterSetNode = segmentEditorNode;
-		d->SegmentEditorWidget->setMRMLSegmentEditorNode(segmentEditorNode);
+		d->SegmentEditorWidget->setMRMLSegmentEditorNode(d->m_ParameterSetNode);
 	}
 }
 
@@ -147,10 +140,8 @@ vtkMRMLSliceCompositeNode* qSlicerVisualSegmentationModuleWidget::getCompositeNo
 
 	vtkMRMLScene* scene = qSlicerApplication::application()->mrmlScene();
 	int count = scene->GetNumberOfNodesByClass("vtkMRMLSliceCompositeNode");
-	std::cout << "173" <<std::to_string(count) << endl;
 	for (int i = 0; i < count; i++)
 	{
-		std::cout << "173" << std::to_string(i) << endl;
 		vtkMRMLNode* node = scene->GetNthNodeByClass(i, "vtkMRMLSliceCompositeNode");
 		vtkMRMLSliceCompositeNode* compNode = vtkMRMLSliceCompositeNode::SafeDownCast(node);
 		if (!layoutName.isEmpty() && compNode->GetLayoutName() != layoutName)
@@ -216,16 +207,14 @@ void  qSlicerVisualSegmentationModuleWidget::enter()
 			segmentEditorNode = vtkMRMLSegmentEditorNode::SafeDownCast(newNode);
 		}
 		d->SegmentEditorWidget->setSegmentationNode(segmentEditorNode);
-		if (d->SegmentEditorWidget->masterVolumeNodeID().isEmpty())
+		
+	}
+	if (d->SegmentEditorWidget->masterVolumeNodeID().isEmpty())
+	{
+		std::string nodeId = getDefaultMasterVolumeNodeID();
+		if (!nodeId.empty())
 		{
-			
-			std::string nodeId = getDefaultMasterVolumeNodeID();
-			if (!nodeId.empty())
-			{
-				std::cout << "id:::" << nodeId << endl;
-				d->SegmentEditorWidget->setMasterVolumeNodeID(QString::fromStdString(nodeId));
-			}
-
+			d->SegmentEditorWidget->setMasterVolumeNodeID(QString::fromStdString(nodeId));
 		}
 	}
 	this->Superclass::enter();

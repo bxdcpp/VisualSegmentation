@@ -507,7 +507,11 @@ void qVisualSegmentEditorWidgetPrivate::init()
   q->updateSliceRotateWarningButtonVisibility();
 
   this->SegmentationNodeComboBox->setVisible(false);
- // this->SegmentationNodeLabel->setVisible(false);
+  this->SegmentationNodeLabel->setVisible(false);
+  this->SliceRotateWarningButton->setVisible(false);
+  this->MasterVolumeNodeLabel->setVisible(false);
+  this->MasterVolumeNodeComboBox->setVisible(false);
+  this->SpecifyGeometryButton->setVisible(false);
 }
 
 //-----------------------------------------------------------------------------
@@ -1158,7 +1162,7 @@ void qVisualSegmentEditorWidget::updateWidgetFromMRML()
 
   this->updateWidgetFromSegmentationNode();
   this->updateWidgetFromMasterVolumeNode();
-  this->updateSliceRotateWarningButtonVisibility();
+  //this->updateSliceRotateWarningButtonVisibility();
 
   d->EffectsGroupBox->setEnabled(d->SegmentationNode != nullptr);
   d->MaskingGroupBox->setEnabled(d->SegmentationNode != nullptr);
