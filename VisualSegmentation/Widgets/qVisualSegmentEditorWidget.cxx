@@ -504,7 +504,7 @@ void qVisualSegmentEditorWidgetPrivate::init()
   this->EffectHelpBrowser->setText("");
   this->MaskingGroupBox->hide();
 
-  q->updateSliceRotateWarningButtonVisibility();
+  //q->updateSliceRotateWarningButtonVisibility();
 
   this->SegmentationNodeComboBox->setVisible(false);
   this->SegmentationNodeLabel->setVisible(false);
@@ -1389,7 +1389,7 @@ bool qVisualSegmentEditorWidget::setMasterRepresentationToBinaryLabelmap()
 
   QApplication::restoreOverrideCursor();
 
-  this->updateSliceRotateWarningButtonVisibility();
+  //this->updateSliceRotateWarningButtonVisibility();
   return true;
 }
 
@@ -1416,7 +1416,7 @@ void qVisualSegmentEditorWidget::updateWidgetFromSegmentationNode()
     qvtkReconnect(d->SegmentationNode, segmentationNode, vtkSegmentation::SegmentRemoved, this, SLOT(onSegmentAddedRemoved()));
     qvtkReconnect(d->SegmentationNode, segmentationNode, vtkSegmentation::SegmentModified, this, SLOT(updateMaskingSection()));
     qvtkReconnect(d->SegmentationNode, segmentationNode, vtkMRMLDisplayableNode::DisplayModifiedEvent, this, SLOT(onSegmentationDisplayModified()));
-    qvtkReconnect(d->SegmentationNode, segmentationNode, vtkSegmentation::MasterRepresentationModified, this, SLOT(updateSliceRotateWarningButtonVisibility()));
+    //qvtkReconnect(d->SegmentationNode, segmentationNode, vtkSegmentation::MasterRepresentationModified, this, SLOT(updateSliceRotateWarningButtonVisibility()));
     d->SegmentationNode = segmentationNode;
 
     bool wasBlocked = d->SegmentationNodeComboBox->blockSignals(true);
@@ -2623,7 +2623,7 @@ void qVisualSegmentEditorWidget::setupViewObservations()
       }
     }
 
-  this->updateSliceRotateWarningButtonVisibility();
+  //this->updateSliceRotateWarningButtonVisibility();
 
   d->ViewsObserved = true;
 }
@@ -2719,7 +2719,7 @@ void qVisualSegmentEditorWidget::processEvents(vtkObject* caller,
   vtkMatrix4x4* sliceToRAS = vtkMatrix4x4::SafeDownCast(caller);
   if (sliceToRAS)
     {
-    self->updateSliceRotateWarningButtonVisibility();
+    //self->updateSliceRotateWarningButtonVisibility();
     return;
     }
 
@@ -2834,7 +2834,7 @@ void qVisualSegmentEditorWidget::setSegmentationNodeSelectorVisible(bool visible
   if (visible != d->RotateWarningInNodeSelectorLayout)
     {
     d->RotateWarningInNodeSelectorLayout = visible;
-    if (d->RotateWarningInNodeSelectorLayout)
+  /*  if (d->RotateWarningInNodeSelectorLayout)
       {
       d->SegmentActionsLayout->removeWidget(d->SliceRotateWarningButton);
       d->SegmentationNodeSelectorLayout->addWidget(d->SliceRotateWarningButton);
@@ -2843,7 +2843,7 @@ void qVisualSegmentEditorWidget::setSegmentationNodeSelectorVisible(bool visible
       {
       d->SegmentationNodeSelectorLayout->removeWidget(d->SliceRotateWarningButton);
       d->SegmentActionsLayout->addWidget(d->SliceRotateWarningButton);
-      }
+      }*/
     }
 }
 
@@ -3621,7 +3621,7 @@ void qVisualSegmentEditorWidget::rotateSliceViewsToSegmentation()
       }
     sliceNode->RotateToAxes(segmentationIJKToRAS.GetPointer());
     }
-  this->updateSliceRotateWarningButtonVisibility();
+  //this->updateSliceRotateWarningButtonVisibility();
 }
 
 //---------------------------------------------------------------------------
