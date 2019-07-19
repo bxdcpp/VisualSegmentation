@@ -470,6 +470,7 @@ void qVisualSegmentEditorWidgetPrivate::init()
   this->SegmentsTableView->setVisibilityColumnVisible(true);
   this->SegmentsTableView->setColorColumnVisible(true);
   this->SegmentsTableView->setOpacityColumnVisible(false);
+  this->SegmentsTableView->setColorColumnVisible(false);
   this->AddSegmentButton->setEnabled(false);
   this->RemoveSegmentButton->setEnabled(false);
   this->Show3DButton->setEnabled(false);
