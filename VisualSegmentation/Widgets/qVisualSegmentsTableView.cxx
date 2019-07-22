@@ -133,9 +133,9 @@ void qVisualSegmentsTableViewPrivate::init()
   this->setMessage(QString());
 
   // Set table header properties
-  this->ColumnLabels << "Visible" << "Color" << "Opacity" << "Name";
+  this->ColumnLabels << "Visible" << "Color" << "Opacity" << QStringLiteral("分割名称");
   this->SegmentsTable->setHorizontalHeaderLabels(
-    QStringList() << "" << "Color" << "Opacity" << "Name" );
+    QStringList() << "" << "Color" << "Opacity" << QStringLiteral("分割名称"));
   this->SegmentsTable->setColumnCount(this->ColumnLabels.size());
 
   this->SegmentsTable->horizontalHeaderItem(
@@ -191,7 +191,7 @@ QTableWidgetItem* qVisualSegmentsTableViewPrivate::findItemBySegmentID(QString s
   Q_Q(qVisualSegmentsTableView);
   for (int row=0; row<this->SegmentsTable->rowCount(); ++row)
     {
-    QTableWidgetItem* item = this->SegmentsTable->item(row, this->columnIndex("Name"));
+    QTableWidgetItem* item = this->SegmentsTable->item(row, this->columnIndex(QStringLiteral("分割名称")));
     if (!item)
       {
       continue;
@@ -355,7 +355,7 @@ void qVisualSegmentsTableView::populateSegmentTable()
     QString name(segment->GetName());
     QTableWidgetItem* nameItem = new QTableWidgetItem(name);
     nameItem->setData(IDRole, segmentId);
-    d->SegmentsTable->setItem(row, d->columnIndex("Name"), nameItem);
+    d->SegmentsTable->setItem(row, d->columnIndex(QStringLiteral("分割名称")), nameItem);
 
     // Get segment display properties
     vtkMRMLSegmentationDisplayNode::SegmentDisplayProperties properties;
@@ -588,7 +588,7 @@ void qVisualSegmentsTableView::onSegmentTableItemChanged(QTableWidgetItem* chang
   QString segmentId = changedItem->data(IDRole).toString();
 
   // If segment name has been changed
-  if (changedItem->column() == d->columnIndex("Name"))
+  if (changedItem->column() == d->columnIndex(QStringLiteral("分割名称")))
     {
     QString nameText(changedItem->text());
     vtkSegment* segment = d->SegmentationNode->GetSegmentation()->GetSegment(segmentId.toLatin1().constData());
@@ -862,7 +862,7 @@ void qVisualSegmentsTableView::setSelectedSegmentIDs(QStringList segmentIDs)
   int columnCount = d->SegmentsTable->columnCount();
   for (int row = 0; row<d->SegmentsTable->rowCount(); ++row)
     {
-    QTableWidgetItem* nameItem = d->SegmentsTable->item(row, d->columnIndex("Name"));
+    QTableWidgetItem* nameItem = d->SegmentsTable->item(row, d->columnIndex(QStringLiteral("分割名称")));
     if (!nameItem)
       {
       // invalid item, canot determine selection state
@@ -884,7 +884,7 @@ void qVisualSegmentsTableView::setSelectedSegmentIDs(QStringList segmentIDs)
   // Deselect items that don't have to be selected anymore
   for (int row = 0; row<d->SegmentsTable->rowCount(); ++row)
     {
-    QTableWidgetItem* nameItem = d->SegmentsTable->item(row, d->columnIndex("Name"));
+    QTableWidgetItem* nameItem = d->SegmentsTable->item(row, d->columnIndex(QStringLiteral("分割名称")));
     if (!nameItem)
       {
       // invalid item, canot determine selection state

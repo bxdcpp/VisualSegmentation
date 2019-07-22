@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>414</width>
+    <width>980</width>
     <height>314</height>
    </rect>
   </property>
@@ -140,7 +140,7 @@
      </column>
      <column>
       <property name="text">
-       <string>Name</string>
+       <string>分割名称</string>
       </property>
       <property name="toolTip">
        <string>Segment name</string>

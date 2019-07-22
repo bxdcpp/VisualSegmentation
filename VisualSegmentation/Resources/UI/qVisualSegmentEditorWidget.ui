@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>512</width>
-    <height>684</height>
+    <height>682</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -494,12 +494,6 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>qVisualSegmentsTableView</class>
-   <extends>qMRMLWidget</extends>
-   <header>qVisualSegmentsTableView.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>ctkCheckBox</class>
    <extends>QCheckBox</extends>
    <header>ctkCheckBox.h</header>
@@ -530,6 +524,12 @@
    <class>ctkRangeWidget</class>
    <extends>QWidget</extends>
    <header>ctkRangeWidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>qVisualSegmentsTableView</class>
+   <extends>qMRMLWidget</extends>
+   <header>qVisualSegmentsTableView.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>
