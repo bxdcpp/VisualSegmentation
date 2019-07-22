@@ -2170,7 +2170,7 @@ void qVisualSegmentEditorWidget::onSwitchToSegmentations()
   nodeSelector->setCurrentNode(segmentationNode);
 
   // Get segments table and select segment
-  qMRMLSegmentsTableView* segmentsTable = moduleWidget->findChild<qMRMLSegmentsTableView*>("SegmentsTableView");
+  qVisualSegmentsTableView* segmentsTable = moduleWidget->findChild<qVisualSegmentsTableView*>("SegmentsTableView");
   if (!segmentsTable)
     {
     qCritical() << Q_FUNC_INFO << ": SegmentsTableView is not found in Segmentations module";
