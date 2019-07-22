@@ -134,7 +134,7 @@
         <string>Add new empty segment</string>
        </property>
        <property name="text">
-        <string>Add</string>
+        <string>添加</string>
        </property>
        <property name="icon">
         <iconset>
@@ -154,7 +154,7 @@
         <string>Remove selected segment(s)</string>
        </property>
        <property name="text">
-        <string>Remove</string>
+        <string>删除</string>
        </property>
        <property name="icon">
         <iconset>
@@ -261,7 +261,7 @@
       </sizepolicy>
      </property>
      <property name="title">
-      <string>Effects</string>
+      <string>操作选择</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignJustify|Qt::AlignVCenter</set>
