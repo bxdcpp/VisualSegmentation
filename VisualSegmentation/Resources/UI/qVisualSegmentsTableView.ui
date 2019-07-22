@@ -124,7 +124,7 @@
      </column>
      <column>
       <property name="text">
-       <string>Color</string>
+       <string>颜色</string>
       </property>
       <property name="toolTip">
        <string>Segment color</string>
