@@ -90,6 +90,7 @@
 #include <qMRMLSliceView.h>
 #include <qMRMLThreeDWidget.h>
 #include <qMRMLThreeDView.h>
+#include <qMRMLSegmentsTableView.h>
 
 // Qt includes
 #include <QAbstractItemView>
@@ -448,7 +449,7 @@ void qVisualSegmentEditorWidgetPrivate::init()
     q, SLOT(saveStateForUndo()) );
   QObject::connect( this->AddSegmentButton, SIGNAL(clicked()), q, SLOT(onAddSegment()) );
   QObject::connect( this->RemoveSegmentButton, SIGNAL(clicked()), q, SLOT(onRemoveSegment()) );
-  QObject::connect( this->SwitchToSegmentationsButton, SIGNAL(clicked()), q, SLOT(onSwitchToSegmentations()) );
+  //QObject::connect( this->SwitchToSegmentationsButton, SIGNAL(clicked()), q, SLOT(onSwitchToSegmentations()) );
   QObject::connect( this->Show3DButton, SIGNAL(toggled(bool)), q, SLOT(onCreateSurfaceToggled(bool)) );
 
   QObject::connect( this->MaskModeComboBox, SIGNAL(currentIndexChanged(int)), q, SLOT(onMaskModeChanged(int)));
@@ -470,7 +471,7 @@ void qVisualSegmentEditorWidgetPrivate::init()
   this->SegmentsTableView->setVisibilityColumnVisible(true);
   this->SegmentsTableView->setColorColumnVisible(true);
   this->SegmentsTableView->setOpacityColumnVisible(false);
-  this->SegmentsTableView->setColorColumnVisible(false);
+  //this->SegmentsTableView->setColorColumnVisible(false);
   this->AddSegmentButton->setEnabled(false);
   this->RemoveSegmentButton->setEnabled(false);
   this->Show3DButton->setEnabled(false);
@@ -513,6 +514,8 @@ void qVisualSegmentEditorWidgetPrivate::init()
   this->MasterVolumeNodeLabel->setVisible(false);
   this->MasterVolumeNodeComboBox->setVisible(false);
   this->SpecifyGeometryButton->setVisible(false);
+  this->SwitchToSegmentationsButton->setVisible(false);
+  this->Show3DButton->setVisible(false);
 }
 
 //-----------------------------------------------------------------------------
@@ -2170,7 +2173,7 @@ void qVisualSegmentEditorWidget::onSwitchToSegmentations()
   nodeSelector->setCurrentNode(segmentationNode);
 
   // Get segments table and select segment
-  qVisualSegmentsTableView* segmentsTable = moduleWidget->findChild<qVisualSegmentsTableView*>("SegmentsTableView");
+  qMRMLSegmentsTableView* segmentsTable = moduleWidget->findChild<qMRMLSegmentsTableView*>("SegmentsTableView");
   if (!segmentsTable)
     {
     qCritical() << Q_FUNC_INFO << ": SegmentsTableView is not found in Segmentations module";
